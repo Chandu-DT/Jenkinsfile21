@@ -1,0 +1,45 @@
+pipeline {
+    agent {node 'ansible'}
+    tools {
+        maven 'Apache Maven 3.9.8'
+    }
+
+    stages {
+        stage('git clone') {
+            steps {
+             git credentialsId: 'jenkins', url: 'https://github.com/Chandu-DT/ks.git'
+            }
+        }
+        stage('list') {
+            steps {
+                sh 'ls -l'
+            }
+        }
+        stage('maven') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        
+        stage('validate') {
+            steps {
+                sh 'mvn validate'
+            }
+        }
+        stage('compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('package') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
