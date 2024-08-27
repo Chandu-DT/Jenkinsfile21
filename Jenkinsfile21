@@ -1,7 +1,7 @@
 pipeline {
     agent {node 'ansible'}
     tools {
-        maven 'Apache Maven 3.9.8'
+        maven 'Apache Maven 3.9.9'
     }
 
     stages {
